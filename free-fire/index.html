@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="https://raw.githubusercontent.com/itzznothacker/website/refs/heads/main/images/favicon.png" type="image/png"> 
+  <title>FREE FIRE CLIP VRO</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    video {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      background-color: black;
+    }
+
+    #overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      text-align: center;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <div id="overlay">Click anywhere to play</div>
+  <video id="video" src="clip.mkv" controls></video>
+
+  <script>
+    const video = document.getElementById('video');
+    const overlay = document.getElementById('overlay');
+
+    function startPlayback() {
+      overlay.style.display = 'none';
+      video.play();
+      document.body.removeEventListener('click', startPlayback);
+    }
+
+    document.body.addEventListener('click', startPlayback);
+  </script>
+</body>
+</html>
