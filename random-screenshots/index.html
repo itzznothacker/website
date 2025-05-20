@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Screenshot Viewer</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #ffffff;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 30px;
+      text-shadow: 0 0 15px #00ffff, 0 0 30px #00ffffaa;
+    }
+
+    .button {
+      background: #00ffff;
+      color: #000;
+      padding: 15px 40px;
+      font-size: 1.3em;
+      font-weight: bold;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 20px #00ffff, 0 0 60px #00ffff88;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .button:hover {
+      background: #00bebe;
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #00ffff, 0 0 80px #00ffffaa;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 10px;
+      font-size: 0.9em;
+      color: #aaa;
+    }
+
+    /* Add moving background circles */
+    .bubbles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      background: rgba(0, 255, 255, 0.2);
+      border-radius: 50%;
+      animation: rise 20s infinite ease-in;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-1200px) scale(1.2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Click to See Random Screenshots</h1>
+  <button class="button" onclick="openRandomScreenshot()">🔍 Show Random Screenshot</button>
+  <div class="footer">Powered by LightShot (prnt.sc)</div>
+
+  <div class="bubbles">
+    <!-- Generate 20 animated circles -->
+    <script>
+      for (let i = 0; i < 20; i++) {
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        bubble.style.left = Math.random() * 100 + '%';
+        bubble.style.width = bubble.style.height = Math.random() * 40 + 20 + 'px';
+        bubble.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        document.querySelector('.bubbles').appendChild(bubble);
+      }
+    </script>
+  </div>
+
+  <script>
+    function generateRandomID() {
+      const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+      let result = '';
+      for (let i = 0; i < 6; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+      }
+      return result;
+    }
+
+    function openRandomScreenshot() {
+      const id = generateRandomID();
+      const url = 'https://prnt.sc/' + id;
+      window.open(url, '_blank');
+    }
+  </script>
+
+</body>
+</html>
